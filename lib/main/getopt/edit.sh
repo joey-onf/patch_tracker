@@ -22,9 +22,11 @@ function do_edit()
     local -n argv=$1 ; shift
     set -- "${argv[@]}"
 
-    declare prefix="$HOME/projects/jobs"
+    declare prefix="$pgmroot"
+    # declare prefix="$HOME/projects/jobs"
     declare -a ref=()
-    ref+=("$prefix/jobs.sh")
+
+    # ref+=("$prefix/jobs.sh")
     while [[ $# -gt 0 ]]; do
         arg="$1"; shift
  
@@ -41,6 +43,7 @@ function do_edit()
         ## Given a switch 
         if [[ -f "$path_sh" ]]; then
             ref+=("$path_sh")
+
         elif [ -d "$path" ]; then
             readarray -t paths < <(find "$path" -maxdepth 1 -name '*.sh' -print)
             ref+=("${paths[@]}")
@@ -50,6 +53,7 @@ function do_edit()
     done
 
     argv=("$@")
+    ref+=("${pgmbin}/jobs.sh")    
     add2edit "${ref[@]}"
     return
 }

@@ -478,6 +478,7 @@ while [ $# -ne 0 ]; do
             declare -a args=("$@")
             do_edit todo args
             set -- "${args[@]}" # Adjust ARGV for --edit args removed
+            add2edit "${pgmbin}/jobs.sh"
             ;;
             
         --browser) BROWSER="$1"; shift ;;
